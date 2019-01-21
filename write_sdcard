@@ -12,11 +12,11 @@ fi
 
 function gen_write_sdcard_command() {
     local SDCARD="$1"
-    echo "dd bs=1M if=\"$RASPBERRY_IMG\" of=\"$SDCARD\" conv=sync"
+    echo "dd bs=4194304 if=\"$RASPBERRY_IMG\" of=\"$SDCARD\" conv=sync"
 }
 
 RASPBERRY_IMG=/tmp/foo.img gen_write_sdcard_command /dev/disk9\
-    | grep -E '^dd bs=1M if="/tmp/foo.img" of="/dev/disk9" conv=sync$' >/dev/null
+    | grep -E '^dd bs=4194304 if="/tmp/foo.img" of="/dev/disk9" conv=sync$' >/dev/null
 
 if ! test -f "$RASPBERRY_IMG"; then
     echo "$RASPBERRY_IMG not exist."
